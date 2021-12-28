@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel=" stylesheet " href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css " integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh " crossorigin="anonymous ">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+</head>
+
+<body class="body">
+    <header class="time bg-dark p-4">
+        <div class="Quiz-show text-warning text-center bg-dark ">
+            <h1>Quiz Show</h1>
+        </div>
+        <div class="score text-warning bg-dark">
+            <h2>Your Score : 0</h2>
+        </div>
+        <p class="time-badge">
+            <h1 class="text-warning text-center bg-dark timer">10</h1>
+        </p>
+    </header>
+    <div class="card-group extra">
+        <div class="card bg-dark m-3">
+            <div class="card-body border border-warning bg-dark">
+                <p class="card-text ">
+                    <h2 class="text-warning bg-dark">Instructions:</h2>
+                </p>
+                <ul class="instructions text-warning ml-3 bg-dark">
+                    <li class="bg-dark">You have only 10 Second each question.</li>
+                    <li class="bg-dark">Each Question contain 1 marks.</li>
+                    <li class="bg-dark">If you don't able to attempt 1 qs then it will contain only 1 mark is deducted.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="jumbotron bg-dark border start-quiz border-warning mt-1">
+        <button type="button" class="btn  btn-warning btn-lg btn-block  "><div class="start">Start Quiz</div></button>
+    </div>
+    <div class="jumbotron  bg-dark border border-warning mt-1 question">
+
+        <div class="questions bg-warning text-black border border-secondary mt-2">
+            <p>Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto, aspernatur!</p>
+        </div>
+        <div class="choices bg-dark  ">
+            <div class="choice border border-warning bg-dark text-warning " id="A" onclick="checkAnswer('A')">Option A</div>
+            <div class="choice bg-dark text-warning border border-warning" id="B" onclick="checkAnswer('B')">Option B</div>
+            <div class="choice bg-dark text-warning border border-warning " id="C" onclick="checkAnswer('C')">Option C</div>
+        </div>
+        <div class="result">
+            <h1>Right Answer</h1>
+        </div>
+
+    </div>
+
+
+    <script src="app.js"></script>
+</body>
+
+</html>

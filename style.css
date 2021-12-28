@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,600;1,500&display=swap');
+.body {
+    font-family: 'Asap', 'sans-serif';
+    background-color: black;
+}
+
+.jumbotron {
+    margin-left: 300px;
+    margin-right: 300px;
+}
+
+.button {
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+.questions {
+    border-radius: 10px;
+    padding: 20px;
+    font-weight: 500;
+}
+
+.questions p {
+    margin: 0;
+    padding-left: 10px;
+    padding-bottom: 15px;
+    font-size: 1.2em;
+    font-style: bold;
+}
+
+.choices {
+    margin: 10px;
+}
+
+.choice {
+    transition: all 500ms;
+    width: auto;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 30px;
+    margin: 10px;
+    font-size: 20px;
+}
+
+.choice:hover {
+    background: yellow;
+}
+
+.result {
+    display: none;
+    font-size: 20px;
+    font-weight: bolder;
+    word-break: break-all;
+    width: 400px;
+    height: 200px;
+    text-align: center;
+    position: absolute;
+    left: 210px;
+    top: 80px;
+}
+
+.Quiz-show {
+    display: block;
+}
+
+.timer {
+    display: none;
+}
+
+.score {
+    display: none;
+}
+
+.jumbotron {
+    display: block;
+}
+
+.question {
+    display: none;
+    border-radius: 20;
+}
