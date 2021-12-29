@@ -95,3 +95,7 @@ function renderQuestion() {
         choiceA.innerHTML = option.choice;
     });
 }
+
+function countDown() {
+
+}
