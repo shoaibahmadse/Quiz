@@ -1,15 +1,19 @@
 const timer = document.querySelector(".timer");
-time = 0;
+const text_warning = document.querySelector(".text-warning");
+const time_no = document.querySelector(".time");
+var cor;
+const chhoice_alll = document.querySelector('.choices');
+let time = 0;
+const restart = document.querySelector('.restart');
 const quiz_show = document.querySelector(".Quiz-show");
 const extra = document.querySelector(".extra");
 const start = document.querySelector(".start");
 const div_questions = document.querySelector(".questions");
 const start_btn = document.querySelector(".jumbotron");
 const outer_question = document.querySelector(".question");
-
+var prev_quiz_playing = null;
 //get every choice element
 const choice_all = document.querySelectorAll(".choice");
-
 const choiceA = document.getElementById("A");
 const choiceB = document.getElementById("B");
 const choiceC = document.getElementById("C");
@@ -21,110 +25,247 @@ let gameOver = false;
 let rightAns = false;
 var selOP = "undefined";
 let correctAns = false;
-var CorrectOP = "A";
+var CorrectOP = '0';
+var opselect = '0';
 // Questions:
-const questions = [
-  {
-    question: "What does HTML stands for?",
-    options: [
-      {
-        choice: "Hyper text Markup Language",
-        correctAns: true,
-      },
-      {
-        choice: "Hyper teller Markup language",
-        correctAns: false,
-      },
-      {
-        choice: "Hyper toll Markup Language",
-        correctAns: false,
-      },
-    ],
-  },
-  {
-    question: "What does HTML stands for?",
-    options: [
-      {
-        choice: "Hyper text Markup Language",
-        correctAns: true,
-      },
-      {
-        choice: "Hyper teller Markup language",
-        correctAns: false,
-      },
-      {
-        choice: "Hyper toll Markup Language",
-        correctAns: false,
-      },
-    ],
-  },
-  {
-    question: "What does HTML stands for?",
-    options: [
-      {
-        choice: "Hyper text Markup Language",
-        correctAns: true,
-      },
-      {
-        choice: "Hyper teller Markup language",
-        correctAns: false,
-      },
-      {
-        choice: "Hyper toll Markup Language",
-        correctAns: false,
-      },
-    ],
-  },
-  {
-    question: "What does HTML stands for?",
-    options: [
-      {
-        choice: "Hyper text Markup Language",
-        correctAns: true,
-      },
-      {
-        choice: "Hyper teller Markup language",
-        correctAns: false,
-      },
-      {
-        choice: "Hyper toll Markup Language",
-        correctAns: false,
-      },
-    ],
-  },
+
+//to check if user can select (and get points) for a option
+let canSelect = true;
+
+
+
+const questions = [{
+        question: "What does HTML stands for?",
+        options: [{
+                choice: "Hyper text Markup Language",
+                correctAns: false,
+            },
+            {
+                choice: "Hyper teller Markup language",
+                correctAns: true,
+            },
+            {
+                choice: "Hyper toll Markup Language",
+                correctAns: false,
+            },
+        ],
+    },
+    {
+        question: "What does HTML stfdsafadsfands for?",
+        options: [{
+                choice: "Hyper text Markup Language",
+                correctAns: true,
+            },
+            {
+                choice: "Hyper teller Markup language",
+                correctAns: false,
+            },
+            {
+                choice: "Hyper toll Markup Language",
+                correctAns: false,
+            },
+        ],
+    },
+    {
+        question: "What does HTML stands for?",
+        options: [{
+                choice: "Hyper text Markup Language",
+                correctAns: true,
+            },
+            {
+                choice: "Hyper teller Markup language",
+                correctAns: false,
+            },
+            {
+                choice: "Hyper toll Markup Language",
+                correctAns: false,
+            },
+        ],
+    },
+    {
+        question: "What does HTML stands for?",
+        options: [{
+                choice: "Hyper text Markup Language",
+                correctAns: true,
+            },
+            {
+                choice: "Hyper teller Markup language",
+                correctAns: false,
+            },
+            {
+                choice: "Hyper toll Markup Language",
+                correctAns: false,
+            },
+        ],
+    },
 ];
 const lastQuestion = questions.length - 1;
 let runningQuestion = 0;
-start.addEventListener("click", initGame);
+
 //Game start:
 function initGame() {
-  scoreBoard.style.display = "inline";
-  quiz_show.style.display = "none";
-  extra.style.display = "none";
-  start_btn.style.display = "none";
-  outer_question.style.display = "block";
-  renderQuestion(runningQuestion);
-  // time = 10;
-  // setInterval(countDown, 1000);
+    scoreBoard.style.display = "block";
+    quiz_show.style.display = "none";
+    extra.style.display = "none";
+    start_btn.style.display = "none";
+    outer_question.style.display = "block";
+    timer.style.display = 'inline';
+    renderQuestion(runningQuestion);
+    time = 10;
+    // if (runningQuestion === '1') {
+    //     clearInterval(prev_quiz_playing);
+    // }
+    // if (prev_quiz_playing) {
+    //     clearInterval(prev_quiz_playing);
+    // }
+}
+//restart game
+function restartgame() {
+    restart.style.display = 'none';
+    location.reload();
 }
 // render question
 function renderQuestion() {
-<<<<<<< HEAD
+    //allow to select option again
+    canSelect = true;
     let q = questions[runningQuestion];
+
     div_questions.innerHTML = "<p>" + q.question + "</p>";
-    q.options.forEach(option => {
-        choiceA.innerHTML = option.choice;
+    choice_all.forEach((choice, index) => {
+        choice.innerHTML = q.options[index].choice;
     });
+    prev_quiz_playing = setInterval(countDown, 1000);
+    // if (runningQuestion === 1) {
+    //     clearInterval(prev_quiz_playing);
+    // }
+    // clearInterval(prev_quiz_playing);
+    // choice_all.forEach((choice, index) => {
+    //     choice = q.options[index].correctAns;
+    //     console.log(choice);
+
+    // })
+}
+
+// questions[runningQuestion].options.forEach((option) => {
+//     console.log(option.correctAns);
+// });
+
+
+function checkAnswer(option) {
+
+    if (selOP == 'undefined') {
+        if (option == '0') {
+            // choiceA.style.background = 'yellow';
+
+            // opSelect++;
+            selOP = '0';
+        } else if (option == '1') {
+            selOP = '1';
+
+            // opSelect++;
+            // choiceB.style.background = 'yellow';
+        } else if (option == '2') {
+            selOP = '2';
+
+            // opSelect++;
+            // choiceC.style.background = 'yellow';
+        }
+    }
+    // if (selOP === '0' && questions[runningQuestion].options[option].correctAns) {
+    //     CorrectOP = '0';
+    // } else if (selOP === '1' && questions[runningQuestion].options[option].correctAns) {
+    //     CorrectOP = '1';
+    // } else if (selOP === '2' && questions[runningQuestion].options[option].correctAns) {
+    //     CorrectOP = '2';
+    // }
+    // cor = questions[runningQuestion].options[option].correctAns;
+    // questions[runningQuestion].options[option].correctAns;
+    if (!canSelect) return;
+    //disable selection untill next one is rendered
+    canSelect = false;
+    if (questions[runningQuestion].options[option].correctAns) {
+        score++;
+        scoreBoard.innerHTML = `<h2>Your Score : ${score}`;
+        runningQuestion++;
+        renderQuestion(runningQuestion);
+        rightAns = true;
+
+        // clearInterval(prev_quiz_playing);
+        // setInterval(countDown, 1000);
+    } else if (!questions[runningQuestion].options[option].correctAns) {
+        timer.innerHTML = `<h1>WRONG</h1>`;
+        // clearInterval(prev_quiz_playing);
+    }
+
+}
+
+
+function showAns(sel, corr) {
+    if (sel != corr) {
+        timer.style.display = 'none';
+        timer.innerHTML = `<h1>WRONG</h1>`;
+        if (sel == '0') {
+            choiceA.style.background = '#f54c4c'
+        } else if (sel == '1') {
+            choiceB.style.background = '#f54c4c'
+        } else if (sel == '2') {
+            choiceC.style.background = '#f54c4c'
+        }
+        if (corr == '0') {
+            choiceA.style.background = '#5eed4e'
+        } else if (corr == '1') {
+            choiceB.style.background = '#f54c4c'
+        } else if (corr == '2') {
+            choiceC.style.background = '#f54c4c'
+        }
+    }
+}
+
+function showCorrect(corr) {
+    // chhoice_alll.style.color = 'none';
+    if (selOP == corr) {
+        timer.style.display = 'block';
+        timer.innerHTML = `<h1>Correct</h1>`
+    } else if (selOP == 'undefined') {
+        // restart.style.display = 'block'
+        // outer_question.style.display = "none";
+        timer.innerHTML = `<h1> You run out of time! </h1>`;
+    }
+    if (corr == '0') {
+        choiceA.style.background = '#5eed4e'
+        choiceA.style.color = 'black';
+    } else if (corr == '1') {
+        choiceB.style.background = '#5eed4e'
+        choiceB.style.color = 'black';
+    } else if (corr == '2') {
+        choiceC.style.background = '#5eed4e'
+        choiceC.style.color = 'black';
+    }
 }
 
 function countDown() {
-
+    if (time > 0) {
+        time--;
+        timer.style.display = 'block';
+        timer.innerHTML = `<h1>${time}</h1>`
+    } else if (time === 0) {
+        time--;
+        // timer.style.display = 'none';
+        // outer_question.style.display = 'none';
+        if (rightAns) {
+            showCorrect(CorrectOP);
+            outer_question.style.display = 'block';
+        } else if (!rightAns) {
+            if (selOP == 'undefined') {
+                showCorrect(CorrectOP);
+            } else if (selOP == '0' || selOP == '1' || selOP == '2') {
+                showAns(selOP, CorrectOP);
+                console.log(selOP);
+            }
+            outer_question.style.display = 'block';
+        }
+    }
 }
-=======
-  let q = questions[runningQuestion];
-  div_questions.innerHTML = "<p>" + q.question + "</p>";
-  choice_all.forEach((choice, index) => {
-    choice.innerHTML = q.options[index].choice;
-  });
-}
->>>>>>> 3e393886256cd0f9d19be21e4c285a7fcac0896c
+start.addEventListener("click", initGame);
+restart.addEventListener('click', restartgame);
+// clearInterval(prev_quiz_playing);

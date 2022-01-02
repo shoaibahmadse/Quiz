@@ -44,7 +44,7 @@
 }
 
 .choice:hover {
-    background: yellow;
+    background: #232730;
 }
 
 .result {
@@ -66,10 +66,18 @@
 
 .timer {
     display: none;
+    color: #ffc107;
+}
+
+.time {
+    color: hsl(45, 100%, 51%);
 }
 
 .score {
     display: none;
+    float: left;
+    position: absolute;
+    top: 30px;
 }
 
 .jumbotron {
@@ -80,3 +88,16 @@
     display: none;
     border-radius: 20;
 }
+
+.restart {
+    display: none;
+}
+
+.choices {
+    color: #ffc107;
+}
+
+
+/* #A{
+    color: ;
+} */

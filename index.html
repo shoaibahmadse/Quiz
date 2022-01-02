@@ -11,16 +11,20 @@
 </head>
 
 <body class="body">
-    <header class="time bg-dark p-4">
+    <header class="bg-dark p-4">
         <div class="Quiz-show text-warning text-center bg-dark ">
             <h1>Quiz Show</h1>
+        </div>
+
+        <div class="timer text-center bg-dark">
+            <div class="time">
+                <h1>10</h1>
+            </div>
         </div>
         <div class="score text-warning bg-dark">
             <h2>Your Score : 0</h2>
         </div>
-        <p class="time-badge">
-            <h1 class="text-warning text-center bg-dark timer">10</h1>
-        </p>
+
     </header>
     <div class="card-group extra">
         <div class="card bg-dark m-3">
@@ -44,15 +48,19 @@
         <div class="questions bg-warning text-black border border-secondary mt-2">
             <p>Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto, aspernatur!</p>
         </div>
-        <div class="choices bg-dark  ">
-            <div class="choice border border-warning bg-dark text-warning " id="A" onclick="checkAnswer('A')">Option A</div>
-            <div class="choice bg-dark text-warning border border-warning" id="B" onclick="checkAnswer('B')">Option B</div>
-            <div class="choice bg-dark text-warning border border-warning " id="C" onclick="checkAnswer('C')">Option C</div>
+        <div class="choices   ">
+            <div class="choice  border border-warning   " id="A" onclick="checkAnswer(0)">Option A</div>
+            <div class="choice   border border-warning" id="B" onclick="checkAnswer(1)">Option B</div>
+            <div class="choice   border border-warning " id="C" onclick="checkAnswer(2)">Option C</div>
         </div>
+
         <div class="result">
             <h1>Right Answer</h1>
         </div>
 
+    </div>
+    <div class="jumbotron  bg-dark border border-warning mt-4 restart">
+        <button type="button" class="btn btn-warning btn-lg btn-block ">Restart</button>
     </div>
 
 
