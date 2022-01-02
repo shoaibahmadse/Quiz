@@ -142,8 +142,8 @@ function renderQuestion() {
     // choice_all.forEach((choice, index) => {
     //     choice = q.options[index].correctAns;
     //     console.log(choice);
-
     // })
+    CorrectOP = questions[runningQuestion].options.findIndex(option => option.correctAns);
 }
 
 // questions[runningQuestion].options.forEach((option) => {
@@ -155,7 +155,7 @@ function checkAnswer(option) {
 
     if (selOP == 'undefined') {
         if (option == '0') {
-            // choiceA.style.background = 'yellow';
+            choiceA.style.background = 'black';
 
             // opSelect++;
             selOP = '0';
@@ -163,12 +163,12 @@ function checkAnswer(option) {
             selOP = '1';
 
             // opSelect++;
-            // choiceB.style.background = 'yellow';
+            choiceB.style.background = 'black';
         } else if (option == '2') {
             selOP = '2';
 
             // opSelect++;
-            // choiceC.style.background = 'yellow';
+            choiceC.style.background = 'black';
         }
     }
     // if (selOP === '0' && questions[runningQuestion].options[option].correctAns) {
@@ -193,7 +193,7 @@ function checkAnswer(option) {
         // clearInterval(prev_quiz_playing);
         // setInterval(countDown, 1000);
     } else if (!questions[runningQuestion].options[option].correctAns) {
-        timer.innerHTML = `<h1>WRONG</h1>`;
+        // timer.innerHTML = `<h1>WRONG</h1>`;
         // clearInterval(prev_quiz_playing);
     }
 
@@ -203,7 +203,7 @@ function checkAnswer(option) {
 function showAns(sel, corr) {
     if (sel != corr) {
         timer.style.display = 'none';
-        timer.innerHTML = `<h1>WRONG</h1>`;
+        // timer.innerHTML = `<h1>WRONG</h1>`;
         if (sel == '0') {
             choiceA.style.background = '#f54c4c'
         } else if (sel == '1') {
@@ -214,9 +214,9 @@ function showAns(sel, corr) {
         if (corr == '0') {
             choiceA.style.background = '#5eed4e'
         } else if (corr == '1') {
-            choiceB.style.background = '#f54c4c'
+            choiceB.style.background = '#5eed4e'
         } else if (corr == '2') {
-            choiceC.style.background = '#f54c4c'
+            choiceC.style.background = '#5eed4e'
         }
     }
 }
@@ -260,7 +260,7 @@ function countDown() {
                 showCorrect(CorrectOP);
             } else if (selOP == '0' || selOP == '1' || selOP == '2') {
                 showAns(selOP, CorrectOP);
-                console.log(selOP);
+
             }
             outer_question.style.display = 'block';
         }
