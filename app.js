@@ -128,13 +128,6 @@ function restartgame() {
 // render question
 function renderQuestion() {
     time = 10;
-    //allow to select option again
-    choiceA.style.background = 'none';
-    choiceB.style.background = 'none';
-    choiceC.style.background = 'none';
-    choiceA.style.color = 'none';
-    choiceB.style.color = 'none';
-    choiceC.style.color = 'none';
 
     canSelect = true;
     let q = questions[runningQuestion];
@@ -143,6 +136,13 @@ function renderQuestion() {
     choice_all.forEach((choice, index) => {
         choice.innerHTML = q.options[index].choice;
     });
+    //allow to select option again
+    choiceA.style.background = 'none';
+    choiceB.style.background = 'none';
+    choiceC.style.background = 'none';
+    choiceA.style.color = 'none';
+    choiceB.style.color = 'none';
+    choiceC.style.color = 'none';
     // if (runningQuestion === 1) {
     //     clearInterval(prev_quiz_playing);
     // }
