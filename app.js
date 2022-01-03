@@ -1,4 +1,4 @@
-const timer = document.querySelector(".timer");
+let timer = document.querySelector(".timer");
 const text_warning = document.querySelector(".text-warning");
 const time_no = document.querySelector(".time");
 var cor;
@@ -104,14 +104,15 @@ let runningQuestion = 0;
 
 //Game start:
 function initGame() {
-    scoreBoard.style.display = "block";
+    scoreBoard.style.display = "inline";
     quiz_show.style.display = "none";
     extra.style.display = "none";
     start_btn.style.display = "none";
-    outer_question.style.display = "block";
-    timer.style.display = 'inline';
     renderQuestion(runningQuestion);
     time = 10;
+    outer_question.style.display = "block";
+    timer.style.display = '';
+    setInterval(countDown, 1000);
     // if (runningQuestion === '1') {
     //     clearInterval(prev_quiz_playing);
     // }
@@ -126,7 +127,15 @@ function restartgame() {
 }
 // render question
 function renderQuestion() {
+    time = 10;
     //allow to select option again
+    choiceA.style.background = 'none';
+    choiceB.style.background = 'none';
+    choiceC.style.background = 'none';
+    choiceA.style.color = 'none';
+    choiceB.style.color = 'none';
+    choiceC.style.color = 'none';
+
     canSelect = true;
     let q = questions[runningQuestion];
 
@@ -134,7 +143,6 @@ function renderQuestion() {
     choice_all.forEach((choice, index) => {
         choice.innerHTML = q.options[index].choice;
     });
-    prev_quiz_playing = setInterval(countDown, 1000);
     // if (runningQuestion === 1) {
     //     clearInterval(prev_quiz_playing);
     // }
@@ -184,16 +192,19 @@ function checkAnswer(option) {
     //disable selection untill next one is rendered
     canSelect = false;
     if (questions[runningQuestion].options[option].correctAns) {
-        score++;
-        scoreBoard.innerHTML = `<h2>Your Score : ${score}`;
-        runningQuestion++;
-        renderQuestion(runningQuestion);
+        // score++;
+        // scoreBoard.innerHTML = `<h2>Your Score : ${score}`;
+        // runningQuestion++;
+        // renderQuestion(runningQuestion);
         rightAns = true;
+        correctAns = true;
 
         // clearInterval(prev_quiz_playing);
         // setInterval(countDown, 1000);
     } else if (!questions[runningQuestion].options[option].correctAns) {
+        rightAns = false;
         // timer.innerHTML = `<h1>WRONG</h1>`;
+
         // clearInterval(prev_quiz_playing);
     }
 
@@ -202,8 +213,8 @@ function checkAnswer(option) {
 
 function showAns(sel, corr) {
     if (sel != corr) {
-        timer.style.display = 'none';
-        // timer.innerHTML = `<h1>WRONG</h1>`;
+        timer.style.display = 'block';
+        timer.innerHTML = `<h1>WRONG</h1>`;
         if (sel == '0') {
             choiceA.style.background = '#f54c4c'
         } else if (sel == '1') {
@@ -250,8 +261,8 @@ function countDown() {
         timer.innerHTML = `<h1>${time}</h1>`
     } else if (time === 0) {
         time--;
-        // timer.style.display = 'none';
-        // outer_question.style.display = 'none';
+        timer.style.display = 'none';
+        outer_question.style.display = 'none';
         if (rightAns) {
             showCorrect(CorrectOP);
             outer_question.style.display = 'block';
@@ -260,9 +271,29 @@ function countDown() {
                 showCorrect(CorrectOP);
             } else if (selOP == '0' || selOP == '1' || selOP == '2') {
                 showAns(selOP, CorrectOP);
-
             }
             outer_question.style.display = 'block';
+        }
+        if (correctAns) {
+            score++;
+            scoreBoard.innerHTML = `<h2>Your Score : ${score}</h2>`;
+        }
+    } else if (time < 0 && time > -4) {
+        time--;
+    } else if (time === -4) {
+        if (runningQuestion < lastQuestion) {
+            runningQuestion++;
+            renderQuestion();
+            correctAns = false;
+            if (runningQuestion > 0) {
+                selOP = 'undefined';
+            }
+        } else if (runningQuestion == lastQuestion) {
+            if (score < questions.length / 2) {
+
+            } else {
+
+            }
         }
     }
 }
