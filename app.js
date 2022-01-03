@@ -1,8 +1,11 @@
 let timer = document.querySelector(".timer");
 const text_warning = document.querySelector(".text-warning");
+const instructions = document.querySelector('.extra>card-text');
 const time_no = document.querySelector(".time");
 var cor;
 const chhoice_alll = document.querySelector(".choices");
+const result_1 = document.querySelector(".result-1")
+const result_2 = document.querySelector(".result-2")
 let time = 0;
 const restart = document.querySelector(".restart");
 const quiz_show = document.querySelector(".Quiz-show");
@@ -31,6 +34,7 @@ var opselect = "0";
 
 //to check if user can select (and get points) for a option
 let canSelect = true;
+// result.style.display = 'none';
 
 const questions = [{
         question: "What does HTML stands for?",
@@ -48,57 +52,66 @@ const questions = [{
             },
         ],
     },
-    {
-        question: "What does HTML stfdsafadsfands for?",
-        options: [{
-                choice: "Hyper text Markup Language",
-                correctAns: true,
-            },
-            {
-                choice: "Hyper teller Markup language",
-                correctAns: false,
-            },
-            {
-                choice: "Hyper toll Markup Language",
-                correctAns: false,
-            },
-        ],
-    },
-    {
-        question: "What does HTML stands for?",
-        options: [{
-                choice: "Hyper text Markup Language",
-                correctAns: true,
-            },
-            {
-                choice: "Hyper teller Markup language",
-                correctAns: false,
-            },
-            {
-                choice: "Hyper toll Markup Language",
-                correctAns: false,
-            },
-        ],
-    },
-    {
-        question: "What does HTML stands for?",
-        options: [{
-                choice: "Hyper text Markup Language",
-                correctAns: true,
-            },
-            {
-                choice: "Hyper teller Markup language",
-                correctAns: false,
-            },
-            {
-                choice: "Hyper toll Markup Language",
-                correctAns: false,
-            },
-        ],
-    },
+    // {
+    //     question: "What does HTML stfdsafadsfands for?",
+    //     options: [{
+    //             choice: "Hyper text Markup Language",
+    //             correctAns: true,
+    //         },
+    //         {
+    //             choice: "Hyper teller Markup language",
+    //             correctAns: false,
+    //         },
+    //         {
+    //             choice: "Hyper toll Markup Language",
+    //             correctAns: false,
+    //         },
+    //     ],
+    // },
+    // {
+    //     question: "What does HTML stands for?",
+    //     options: [{
+    //             choice: "Hyper text Markup Language",
+    //             correctAns: true,
+    //         },
+    //         {
+    //             choice: "Hyper teller Markup language",
+    //             correctAns: false,
+    //         },
+    //         {
+    //             choice: "Hyper toll Markup Language",
+    //             correctAns: false,
+    //         },
+    //     ],
+    // },
+    // {
+    //     question: "What does HTML stands for?",
+    //     options: [{
+    //             choice: "Hyper text Markup Language",
+    //             correctAns: true,
+    //         },
+    //         {
+    //             choice: "Hyper teller Markup language",
+    //             correctAns: false,
+    //         },
+    //         {
+    //             choice: "Hyper toll Markup Language",
+    //             correctAns: false,
+    //         },
+    //     ],
+    // },
 ];
 const lastQuestion = questions.length - 1;
 let runningQuestion = 0;
+//result
+
+
+
+
+
+
+
+
 
 //Game start:
 function initGame() {
@@ -111,6 +124,7 @@ function initGame() {
     outer_question.style.display = "block";
     timer.style.display = "";
     setInterval(countDown, 1000);
+
     // if (runningQuestion === '1') {
     //     clearInterval(prev_quiz_playing);
     // }
@@ -127,6 +141,7 @@ function restartgame() {
 function renderQuestion() {
     time = 10;
     //allow to select option again
+
     choiceA.style.background = "none";
     choiceB.style.background = "none";
     choiceC.style.background = "none";
@@ -285,7 +300,12 @@ function countDown() {
                 selOP = "undefined";
             }
         } else if (runningQuestion == lastQuestion) {
-            if (score < questions.length / 2) {} else {}
+            if (score < questions.length / 2) {
+                outer_question.style.display = 'none';
+
+            } else {
+
+            }
         }
     }
 }

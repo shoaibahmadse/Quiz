@@ -4,6 +4,11 @@
     background-color: black;
 }
 
+.results {
+    width: 100%;
+    display: none;
+}
+
 .jumbotron {
     margin-left: 300px;
     margin-right: 300px;
@@ -47,7 +52,8 @@
     background: #232730;
 }
 
-.result {
+
+/* .result {
     display: none;
     font-size: 20px;
     font-weight: bolder;
@@ -58,7 +64,7 @@
     position: absolute;
     left: 210px;
     top: 80px;
-}
+} */
 
 .Quiz-show {
     display: block;
@@ -93,9 +99,10 @@
     display: none;
 }
 
-.choices {
+
+/* .choices {
     color: #ffc107;
-}
+} */
 
 
 /* #A {
