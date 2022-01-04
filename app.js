@@ -1,7 +1,7 @@
 let timer = document.querySelector(".timer");
 const text_warning = document.querySelector(".text-warning");
-const instructions = document.querySelector('.extra>card-text');
 const time_no = document.querySelector(".time");
+const head = document.querySelector('.head');
 var cor;
 const chhoice_alll = document.querySelector(".choices");
 const result_1 = document.querySelector(".result-1")
@@ -20,7 +20,7 @@ const choice_all = document.querySelectorAll(".choice");
 const choiceA = document.getElementById("A");
 const choiceB = document.getElementById("B");
 const choiceC = document.getElementById("C");
-const result = document.querySelector("result");
+const result = document.querySelector(".results");
 const prize = 0;
 var scoreBoard = document.querySelector(".score");
 var score = 0;
@@ -30,21 +30,21 @@ var selOP = "undefined";
 let correctAns = false;
 var CorrectOP = "0";
 var opselect = "0";
-// Questions:
+
 
 //to check if user can select (and get points) for a option
 let canSelect = true;
-// result.style.display = 'none';
 
+//Questions portions:
 const questions = [{
         question: "What does HTML stands for?",
         options: [{
                 choice: "Hyper text Markup Language",
-                correctAns: false,
+                correctAns: true,
             },
             {
                 choice: "Hyper teller Markup language",
-                correctAns: true,
+                correctAns: false,
             },
             {
                 choice: "Hyper toll Markup Language",
@@ -52,65 +52,57 @@ const questions = [{
             },
         ],
     },
-    // {
-    //     question: "What does HTML stfdsafadsfands for?",
-    //     options: [{
-    //             choice: "Hyper text Markup Language",
-    //             correctAns: true,
-    //         },
-    //         {
-    //             choice: "Hyper teller Markup language",
-    //             correctAns: false,
-    //         },
-    //         {
-    //             choice: "Hyper toll Markup Language",
-    //             correctAns: false,
-    //         },
-    //     ],
-    // },
-    // {
-    //     question: "What does HTML stands for?",
-    //     options: [{
-    //             choice: "Hyper text Markup Language",
-    //             correctAns: true,
-    //         },
-    //         {
-    //             choice: "Hyper teller Markup language",
-    //             correctAns: false,
-    //         },
-    //         {
-    //             choice: "Hyper toll Markup Language",
-    //             correctAns: false,
-    //         },
-    //     ],
-    // },
-    // {
-    //     question: "What does HTML stands for?",
-    //     options: [{
-    //             choice: "Hyper text Markup Language",
-    //             correctAns: true,
-    //         },
-    //         {
-    //             choice: "Hyper teller Markup language",
-    //             correctAns: false,
-    //         },
-    //         {
-    //             choice: "Hyper toll Markup Language",
-    //             correctAns: false,
-    //         },
-    //     ],
-    // },
+    {
+        question: "What does CSS stands for?",
+        options: [{
+                choice: "Casting Sheet style",
+                correctAns: false,
+            },
+            {
+                choice: "Casting style sheet",
+                correctAns: true,
+            },
+            {
+                choice: "Coloumn style sheet",
+                correctAns: false,
+            },
+        ],
+    },
+    {
+        question: "What does Js stands for?",
+        options: [{
+                choice: "Jango script",
+                correctAns: false,
+            },
+            {
+                choice: "Joke script",
+                correctAns: false,
+            },
+            {
+                choice: "Java script",
+                correctAns: true,
+            },
+        ],
+    },
+    {
+        question: "Plural of sheep is?",
+        options: [{
+                choice: "Sheepes",
+                correctAns: false,
+            },
+            {
+                choice: "Sheep",
+                correctAns: true,
+            },
+            {
+                choice: "Sheeps",
+                correctAns: false,
+            },
+        ],
+    },
 ];
-const lastQuestion = questions.length - 1;
+const lastQuestion = questions.length - 1; //to get last question.
 let runningQuestion = 0;
-//result
-
-
-
-
-
-
-
 
 
 //Game start:
@@ -122,135 +114,101 @@ function initGame() {
     renderQuestion(runningQuestion);
     time = 10;
     outer_question.style.display = "block";
-    timer.style.display = "";
     setInterval(countDown, 1000);
-
-    // if (runningQuestion === '1') {
-    //     clearInterval(prev_quiz_playing);
-    // }
-    // if (prev_quiz_playing) {
-    //     clearInterval(prev_quiz_playing);
-    // }
 }
 //restart game
 function restartgame() {
-    restart.style.display = "none";
+    restart.style.display = "block";
     location.reload();
 }
 // render question
 function renderQuestion() {
     time = 10;
-    //allow to select option again
-
-    choiceA.style.background = "none";
-    choiceB.style.background = "none";
-    choiceC.style.background = "none";
+    // Changing the background and color after new question.
+    choiceA.style.background = "#343a40";
+    choiceB.style.background = "#343a40";
+    choiceC.style.background = "#343a40";
     choiceA.style.color = "#ffc107";
     choiceB.style.color = "#ffc107";
     choiceC.style.color = "#ffc107";
 
+    //allow to select option again
     canSelect = true;
     let q = questions[runningQuestion];
 
     div_questions.innerHTML = "<p>" + q.question + "</p>";
+    // Pushing questions to html.
     choice_all.forEach((choice, index) => {
         choice.innerHTML = q.options[index].choice;
     });
-    // if (runningQuestion === 1) {
-    //     clearInterval(prev_quiz_playing);
-    // }
-    // clearInterval(prev_quiz_playing);
-    // choice_all.forEach((choice, index) => {
-    //     choice = q.options[index].correctAns;
-    //     console.log(choice);
-    // })
+    // Getting the index of correct option.
     CorrectOP = questions[runningQuestion].options.findIndex(
         (option) => option.correctAns
     );
 }
 
-// questions[runningQuestion].options.forEach((option) => {
-//     console.log(option.correctAns);
-// });
-
+//Check answer function:
 function checkAnswer(option) {
     if (selOP == "undefined") {
         if (option == "0") {
             choiceA.style.background = "black";
-
-            // opSelect++;
             selOP = "0";
         } else if (option == "1") {
             selOP = "1";
-
-            // opSelect++;
             choiceB.style.background = "black";
         } else if (option == "2") {
             selOP = "2";
-
-            // opSelect++;
             choiceC.style.background = "black";
         }
     }
-    // if (selOP === '0' && questions[runningQuestion].options[option].correctAns) {
-    //     CorrectOP = '0';
-    // } else if (selOP === '1' && questions[runningQuestion].options[option].correctAns) {
-    //     CorrectOP = '1';
-    // } else if (selOP === '2' && questions[runningQuestion].options[option].correctAns) {
-    //     CorrectOP = '2';
-    // }
-    // cor = questions[runningQuestion].options[option].correctAns;
-    // questions[runningQuestion].options[option].correctAns;
+    //if selection is done then it will return.
     if (!canSelect) return;
     //disable selection untill next one is rendered
     canSelect = false;
+    //getting the right answer of all questions
     if (questions[runningQuestion].options[option].correctAns) {
-        // score++;
-        // scoreBoard.innerHTML = `<h2>Your Score : ${score}`;
-        // runningQuestion++;
-        // renderQuestion(runningQuestion);
         rightAns = true;
         correctAns = true;
-
-        // clearInterval(prev_quiz_playing);
-        // setInterval(countDown, 1000);
     } else if (!questions[runningQuestion].options[option].correctAns) {
         rightAns = false;
-        // timer.innerHTML = `<h1>WRONG</h1>`;
-
-        // clearInterval(prev_quiz_playing);
     }
 }
-
+//show answer if user select a option.
 function showAns(sel, corr) {
     if (sel != corr) {
         timer.style.display = "block";
         timer.innerHTML = `<h1>WRONG</h1>`;
         if (sel == "0") {
-            choiceA.style.background = "#f54c4c";
+            choiceA.style.background = "red";
+            choiceA.style.color = "black";
         } else if (sel == "1") {
-            choiceB.style.background = "#f54c4c";
+            choiceB.style.background = "red";
+            choiceB.style.color = "black";
         } else if (sel == "2") {
-            choiceC.style.background = "#f54c4c";
+            choiceC.style.background = "red";
+            choiceC.style.color = "black";
         }
         if (corr == "0") {
             choiceA.style.background = "#5eed4e";
+            choiceA.style.color = "black";
         } else if (corr == "1") {
             choiceB.style.background = "#5eed4e";
+            choiceB.style.color = "black";
         } else if (corr == "2") {
             choiceC.style.background = "#5eed4e";
+            choiceC.style.color = "black";
         }
     }
 }
-
+//Show answer if user can't select a option.
 function showCorrect(corr) {
-    // chhoice_alll.style.color = 'none';
     if (selOP == corr) {
         timer.style.display = "block";
         timer.innerHTML = `<h1>Correct</h1>`;
     } else if (selOP == "undefined") {
-        // restart.style.display = 'block'
-        // outer_question.style.display = "none";
+        timer.style.display = 'block';
+        scoreBoard.style.display = 'block';
+        outer_question.style.display = "none";
         timer.innerHTML = `<h1> You run out of time! </h1>`;
     }
     if (corr == "0") {
@@ -264,7 +222,7 @@ function showCorrect(corr) {
         choiceC.style.color = "black";
     }
 }
-
+//this function is for countdown purpose and for last result page.
 function countDown() {
     if (time > 0) {
         time--;
@@ -301,14 +259,23 @@ function countDown() {
             }
         } else if (runningQuestion == lastQuestion) {
             if (score < questions.length / 2) {
+                timer.style.display = 'none';
+                scoreBoard.style.display = 'none';
+                result.style.display = 'block';
                 outer_question.style.display = 'none';
-
+                result_1.innerHTML = `Your Score : ${score}`;
+                result_2.innerHTML = `You lost. You score half then the total question`;
+                result.style.display = 'block';
             } else {
-
+                timer.style.display = 'none';
+                scoreBoard.style.display = 'none';
+                result.style.display = 'block';
+                outer_question.style.display = 'none';
+                result_1.innerHTML = `Your Score : ${score}`;
             }
+            restart.style.display = 'block';
         }
     }
 }
 start.addEventListener("click", initGame);
 restart.addEventListener("click", restartgame);
-// clearInterval(prev_quiz_playing);

@@ -4,8 +4,7 @@
     background-color: black;
 }
 
-.results {
-    width: 100%;
+div.results {
     display: none;
 }
 
@@ -49,7 +48,7 @@
 }
 
 .choice:hover {
-    background: #232730;
+    background: #111318;
 }
 
 
@@ -84,6 +83,10 @@
     float: left;
     position: absolute;
     top: 30px;
+}
+
+.head {
+    display: none;
 }
 
 .jumbotron {
